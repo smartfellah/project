@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser";
 import compression from "compression";
 import cors from "cors";
 
-const app = express;
+const app = express();
 
 app.use(
   cors({
