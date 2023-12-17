@@ -20,7 +20,7 @@
   --bg-primary: #e6e2dd;
   --accent-primary: #d48166;
   --accent-secondary: #ffffff;
-  --text-dark: #000000;
+  --text-dark: #373a36;
   --text-light: #f9f9f9;
   --text-grey: #e6e2dd;
   background-color: var(--bg-primary);
@@ -34,4 +34,23 @@ body {
 
 a {
   text-decoration: none;
+}
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+
+button {
+  padding: 0;
+  border: none;
+  outline: none;
+  font: inherit;
+  color: inherit;
+  background: none;
+}
+
+input {
+  all: unset;
 }
