@@ -37,7 +37,7 @@ const Header: FC = () => {
                     height={24}
                   />
 
-                  {/* <p
+                  <p
                     className={
                       isActive
                         ? `${styles.LinkText} ${styles.LinkText_Active}`
@@ -45,7 +45,7 @@ const Header: FC = () => {
                     }
                   >
                     Search
-                  </p> */}
+                  </p>
                 </div>
               );
             }}

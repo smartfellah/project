@@ -57,7 +57,7 @@
   display: flex;
   align-items: center;
   padding-inline: var(--s-5);
-  gap: var(--s-2);
+  gap: var(--s-4);
   /* border-radius: var(--s-6); */
 }
 .Container_Active {
@@ -79,7 +79,7 @@
 .LinkText {
   font-family: "Inconsolata", monospace;
   font-weight: 400;
-  font-size: var(--s-4);
+  font-size: var(--s-5);
   color: var(--accent-secondary);
   text-align: center;
 }
