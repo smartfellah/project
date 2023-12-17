@@ -1,0 +1,48 @@
+.Header {
+  height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
+  background-color: var(--bg-secondary);
+}
+.NavBar {
+  width: 1280px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
+}
+.MenuBox {
+  display: flex;
+  flex: 1 1 33%;
+  gap: var(--s-2);
+  justify-content: flex-start;
+}
+.LogoBox {
+  display: flex;
+  flex: 1 1 33%;
+  justify-content: center;
+}
+.ProfileBox {
+  display: flex;
+  flex: 1 1 33%;
+  justify-content: flex-end;
+}
+.MenuBox-Item {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-5);
+}
+.ProfileBox-Item {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-5);
+}
+.LogoBox-Item {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-5);
+}
