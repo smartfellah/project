@@ -1,4 +1,8 @@
+//import styles
 import styles from "./header.module.css";
+
+//import Router
+import { NavLink } from "react-router-dom";
 
 //icons import
 import likeActive from "../../assets/like_active.svg";
@@ -17,86 +21,107 @@ const Header: FC = () => {
     <header className={styles.Header}>
       <nav className={styles.NavBar}>
         <menu className={styles.MenuBox}>
-          <div
-            className={
-              // eslint-disable-next-line no-constant-condition
-              true
-                ? `${styles["MenuBox-Item"]} ${styles["MenuBox-Item-Active"]}`
-                : `${styles["MenuBox-Item"]}`
-            }
-          >
-            <img
-              // eslint-disable-next-line no-constant-condition
-              src={true ? likeActive : likeInactive}
-              alt="liked vacancies image"
-              height={24}
-            />
+          <NavLink to="/favorites" className={`${styles["MenuBox-Item"]}`}>
+            {function favoritesLink({ isActive }: { isActive: boolean }) {
+              return (
+                <div
+                  className={
+                    isActive
+                      ? `${styles.MenuBox_InLinkContainer} ${styles.MenuBox_InLinkContainer_Active}`
+                      : styles.MenuBox_InLinkContainer
+                  }
+                >
+                  <img
+                    src={isActive ? likeActive : likeInactive}
+                    alt="liked vacancies image"
+                    height={24}
+                  />
 
-            <p
-              className={
-                // eslint-disable-next-line no-constant-condition
-                true
-                  ? `${styles.LinkText} ${styles.LinkText_Active}`
-                  : styles.LinkText
-              }
-            >
-              Favorites
-            </p>
-          </div>
-          <div
-            className={
-              // eslint-disable-next-line no-constant-condition
-              true
-                ? `${styles["MenuBox-Item"]}`
-                : `${styles["MenuBox-Item"]} ${styles["MenuBox-Item-Active"]}`
-            }
-          >
-            <img
-              // eslint-disable-next-line no-constant-condition
-              src={false ? searchActive : searchInactive}
-              alt="liked vacancies image"
-              height={24}
-            />
+                  <p
+                    className={
+                      isActive
+                        ? `${styles.LinkText} ${styles.LinkText_Active}`
+                        : styles.LinkText
+                    }
+                  >
+                    Favorites
+                  </p>
+                </div>
+              );
+            }}
+          </NavLink>
+          <NavLink to="/search" className={`${styles["MenuBox-Item"]}`}>
+            {function searchLink({ isActive }: { isActive: boolean }) {
+              return (
+                <div
+                  className={
+                    isActive
+                      ? `${styles.MenuBox_InLinkContainer} ${styles.MenuBox_InLinkContainer_Active}`
+                      : styles.MenuBox_InLinkContainer
+                  }
+                >
+                  <img
+                    src={isActive ? searchActive : searchInactive}
+                    alt="liked vacancies image"
+                    height={24}
+                  />
 
-            <p
-              className={
-                // eslint-disable-next-line no-constant-condition
-                false
-                  ? `${styles.LinkText} ${styles.LinkText_Active}`
-                  : styles.LinkText
-              }
-            >
-              Favorites
-            </p>
-          </div>
+                  <p
+                    className={
+                      isActive
+                        ? `${styles.LinkText} ${styles.LinkText_Active}`
+                        : styles.LinkText
+                    }
+                  >
+                    Search
+                  </p>
+                </div>
+              );
+            }}
+          </NavLink>
         </menu>
         <div className={styles.LogoBox}>
-          <div
-            className={
-              // eslint-disable-next-line no-constant-condition
-              true
-                ? `${styles["LogoBox-Item"]}`
-                : `${styles["LogoBox-Item"]} ${styles["LogoBox-Item-Active"]}`
-            }
-          >
-            <img
-              // eslint-disable-next-line no-constant-condition
-              src={false ? logoActive : logoInactive}
-              alt="liked vacancies image"
-              height={40}
-            />
-          </div>
+          <NavLink to="/" className={`${styles["LogoBox-Item"]}`}>
+            {function logoLink({ isActive }: { isActive: boolean }) {
+              return (
+                <img
+                  src={isActive ? logoActive : logoInactive}
+                  alt="liked vacancies image"
+                  height={40}
+                />
+              );
+            }}
+          </NavLink>
         </div>
         <div className={styles.ProfileBox}>
-          <div className={`${styles["ProfileBox-Item"]}`}>
-            <img
-              // eslint-disable-next-line no-constant-condition
-              src={true ? profileInactive : profileActive}
-              alt="liked vacancies image"
-              height={24}
-            />
-            <p className={styles.LinkText}>Profile</p>
-          </div>
+          <NavLink to="/profile" className={`${styles["ProfileBox-Item"]}`}>
+            {function profileLink({ isActive }: { isActive: boolean }) {
+              return (
+                <div
+                  className={
+                    isActive
+                      ? `${styles.MenuBox_InLinkContainer} ${styles.MenuBox_InLinkContainer_Active}`
+                      : styles.MenuBox_InLinkContainer
+                  }
+                >
+                  <img
+                    src={isActive ? profileActive : profileInactive}
+                    alt="liked vacancies image"
+                    height={24}
+                  />
+                  <p
+                    className={
+                      isActive
+                        ? `${styles.LinkText} ${styles.LinkText_Active}`
+                        : styles.LinkText
+                    }
+                  >
+                    Profile
+                  </p>
+                </div>
+              );
+            }}
+          </NavLink>
         </div>
       </nav>
     </header>
