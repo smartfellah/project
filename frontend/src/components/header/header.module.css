@@ -1,3 +1,4 @@
+/* Header contains navbar */
 .Header {
   height: 88px;
   /* margin-inline: 2%;
@@ -7,6 +8,58 @@
   justify-content: stretch;
   background-color: var(--accent-primary);
 }
+
+/* Navbar contains boxes for each nav section*/
+.NavBar {
+  width: 1280px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
+}
+
+/* MenuBox contains two menu items: favorites and search */
+.MenuBox {
+  display: flex;
+  flex: 1 1 33%;
+  gap: var(--s-2);
+  justify-content: flex-start;
+}
+
+/* LogoBox contains one item: logo */
+.LogoBox {
+  display: flex;
+  flex: 1 1 33%;
+  justify-content: center;
+}
+
+/* ProfileBox contains one item: profile */
+.ProfileBox {
+  display: flex;
+  flex: 1 1 33%;
+  justify-content: flex-end;
+}
+
+/* Item contained in each of the boxes */
+.BoxItem {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+/* Container for elements that are inisde the box item */
+.Container {
+  display: flex;
+  align-items: center;
+  padding: var(--s-5);
+  gap: var(--s-2);
+  border-radius: var(--s-6);
+}
+.Container_Active {
+  background-color: var(--accent-secondary);
+}
+
+/* LinkText */
 .LinkText {
   font-family: "Inconsolata", monospace;
   font-weight: 400;
@@ -16,58 +69,4 @@
 }
 .LinkText_Active {
   color: var(--text-dark);
-}
-.NavBar {
-  width: 1280px;
-  margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: stretch;
-}
-.MenuBox {
-  display: flex;
-  flex: 1 1 33%;
-  gap: var(--s-2);
-  justify-content: flex-start;
-}
-.LogoBox {
-  display: flex;
-  flex: 1 1 33%;
-  justify-content: center;
-}
-.ProfileBox {
-  display: flex;
-  flex: 1 1 33%;
-  justify-content: flex-end;
-}
-.MenuBox-Item {
-  display: flex;
-  align-items: center;
-  gap: var(--s-2);
-}
-.MenuBox_InLinkContainer {
-  display: flex;
-  align-items: center;
-  padding: var(--s-5);
-  gap: var(--s-2);
-  border-radius: var(--s-6);
-}
-.MenuBox_InLinkContainer_Active {
-  background-color: var(--accent-secondary);
-}
-.MenuBox-Item-Active {
-  background-color: var(--accent-secondary);
-}
-
-.ProfileBox-Item {
-  display: flex;
-  align-items: center;
-  gap: var(--s-2);
-  padding: var(--s-5);
-}
-.LogoBox-Item {
-  display: flex;
-  align-items: center;
-  gap: var(--s-2);
-  padding: var(--s-5);
 }

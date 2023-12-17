@@ -14,26 +14,26 @@ import searchInactive from "../../assets/search_inactive.svg";
 import logoActive from "../../assets/logo_active.svg";
 import logoInactive from "../../assets/logo_inactive.svg";
 
-import React, { FC } from "react";
+import { FC } from "react";
 
 const Header: FC = () => {
   return (
     <header className={styles.Header}>
       <nav className={styles.NavBar}>
         <menu className={styles.MenuBox}>
-          <NavLink to="/favorites" className={`${styles["MenuBox-Item"]}`}>
+          <NavLink to="/favorites" className={styles.BoxItem}>
             {function favoritesLink({ isActive }: { isActive: boolean }) {
               return (
                 <div
                   className={
                     isActive
-                      ? `${styles.MenuBox_InLinkContainer} ${styles.MenuBox_InLinkContainer_Active}`
-                      : styles.MenuBox_InLinkContainer
+                      ? `${styles.Container} ${styles.Container_Active}`
+                      : styles.Container
                   }
                 >
                   <img
                     src={isActive ? likeActive : likeInactive}
-                    alt="liked vacancies image"
+                    alt="liked vacancies icon"
                     height={24}
                   />
 
@@ -50,19 +50,19 @@ const Header: FC = () => {
               );
             }}
           </NavLink>
-          <NavLink to="/search" className={`${styles["MenuBox-Item"]}`}>
+          <NavLink to="/search" className={styles.BoxItem}>
             {function searchLink({ isActive }: { isActive: boolean }) {
               return (
                 <div
                   className={
                     isActive
-                      ? `${styles.MenuBox_InLinkContainer} ${styles.MenuBox_InLinkContainer_Active}`
-                      : styles.MenuBox_InLinkContainer
+                      ? `${styles.Container} ${styles.Container_Active}`
+                      : styles.Container
                   }
                 >
                   <img
                     src={isActive ? searchActive : searchInactive}
-                    alt="liked vacancies image"
+                    alt="search icon"
                     height={24}
                   />
 
@@ -81,12 +81,12 @@ const Header: FC = () => {
           </NavLink>
         </menu>
         <div className={styles.LogoBox}>
-          <NavLink to="/" className={`${styles["LogoBox-Item"]}`}>
+          <NavLink to="/" className={styles.BoxItem}>
             {function logoLink({ isActive }: { isActive: boolean }) {
               return (
                 <img
                   src={isActive ? logoActive : logoInactive}
-                  alt="liked vacancies image"
+                  alt="project vvid logo"
                   height={40}
                 />
               );
@@ -94,19 +94,19 @@ const Header: FC = () => {
           </NavLink>
         </div>
         <div className={styles.ProfileBox}>
-          <NavLink to="/profile" className={`${styles["ProfileBox-Item"]}`}>
+          <NavLink to="/profile" className={styles.BoxItem}>
             {function profileLink({ isActive }: { isActive: boolean }) {
               return (
                 <div
                   className={
                     isActive
-                      ? `${styles.MenuBox_InLinkContainer} ${styles.MenuBox_InLinkContainer_Active}`
-                      : styles.MenuBox_InLinkContainer
+                      ? `${styles.Container} ${styles.Container_Active}`
+                      : styles.Container
                   }
                 >
                   <img
                     src={isActive ? profileActive : profileInactive}
-                    alt="liked vacancies image"
+                    alt="profile icon"
                     height={24}
                   />
                   <p
