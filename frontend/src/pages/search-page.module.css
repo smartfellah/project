@@ -1,0 +1,62 @@
+.Container {
+  margin: auto;
+  width: 1280px;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+}
+
+.SearchFormContainer {
+  margin: auto;
+  height: var(--l-3);
+  width: 100%;
+  display: flex;
+  background-color: var(--bg-dark);
+}
+
+.ButtonContainer {
+  width: 50%;
+  height: var(--l-1);
+  display: flex;
+  align-items: center;
+}
+.SearchButton {
+  box-shadow: none;
+  background-color: var(--accent-primary);
+  height: 100%;
+  /* border-radius: var(--l-1); */
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.CrossIcon {
+  position: absolute;
+  right: var(--s-2);
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+}
+.TextInput {
+  padding-left: var(--s-4);
+  padding-right: var(--s-16);
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: var(--s-5);
+  width: 100%;
+  background-color: var(--bg-primary);
+  height: 100%;
+}
+.TextInput:focus {
+  border-bottom: solid 3px var(--bg-primary);
+}
+.ButtonText {
+  font-family: "Inconsolata", monospace;
+  font-weight: 400;
+  font-size: var(--s-5);
+  color: var(--text-light);
+  text-align: center;
+}

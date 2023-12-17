@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="118.51294mm"
+   height="118.65895mm"
+   viewBox="0 0 118.51294 118.65895"
+   version="1.1"
+   id="svg5"
+   xml:space="preserve"
+   inkscape:export-filename="search_inactive.svg"
+   inkscape:export-xdpi="10.123659"
+   inkscape:export-ydpi="10.123659"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#111111"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false" /><defs
+     id="defs2" /><g
+     inkscape:label="Слой 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-48.492665,-18.753614)"><path
+       style="fill:#000000;stroke-width:0.264583"
+       d="m 50.845629,136.90824 c -1.81041,-0.89227 -2.75063,-3.00025 -2.19292,-4.91655 0.28743,-0.98762 3.53663,-4.3366 26.6962,-27.51602 L 101.71785,78.084127 75.346139,51.691287 C 46.678149,23.000349 48.330889,24.827958 48.798579,22.334972 c 0.24434,-1.302446 1.82698,-2.885087 3.12943,-3.129427 2.49298,-0.467687 0.66538,-2.120433 29.35632,26.547562 l 26.392841,26.37171 26.52383,-26.5049 c 28.85016,-28.829565 26.99014,-27.147429 29.49799,-26.676952 1.26124,0.236608 2.88618,1.887683 3.12837,3.178675 0.45654,2.433536 2.05966,0.665353 -26.68946,29.437357 l -26.50403,26.52512 26.50491,26.523833 c 28.82958,28.85017 27.14744,26.99015 26.67696,29.49801 -0.2366,1.26123 -1.88768,2.88617 -3.17867,3.12836 -2.43354,0.45654 -0.66536,2.05966 -29.43736,-26.68945 L 107.6746,84.040837 81.283049,110.41762 c -14.86579,14.85747 -26.71683,26.498 -27.13638,26.65433 -1.05982,0.39492 -2.29151,0.33384 -3.30104,-0.16371 z"
+       id="path1075" /></g></svg>

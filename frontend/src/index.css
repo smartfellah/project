@@ -54,3 +54,6 @@ button {
 input {
   all: unset;
 }
+/* input[type="search"] {
+  all: revert;
+} */
