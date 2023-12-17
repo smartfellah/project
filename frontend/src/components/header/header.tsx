@@ -21,35 +21,6 @@ const Header: FC = () => {
     <header className={styles.Header}>
       <nav className={styles.NavBar}>
         <menu className={styles.MenuBox}>
-          <NavLink to="/favorites" className={styles.BoxItem}>
-            {function favoritesLink({ isActive }: { isActive: boolean }) {
-              return (
-                <div
-                  className={
-                    isActive
-                      ? `${styles.Container} ${styles.Container_Active}`
-                      : styles.Container
-                  }
-                >
-                  <img
-                    src={isActive ? likeActive : likeInactive}
-                    alt="liked vacancies icon"
-                    height={24}
-                  />
-
-                  <p
-                    className={
-                      isActive
-                        ? `${styles.LinkText} ${styles.LinkText_Active}`
-                        : styles.LinkText
-                    }
-                  >
-                    Favorites
-                  </p>
-                </div>
-              );
-            }}
-          </NavLink>
           <NavLink to="/search" className={styles.BoxItem}>
             {function searchLink({ isActive }: { isActive: boolean }) {
               return (
@@ -66,7 +37,7 @@ const Header: FC = () => {
                     height={24}
                   />
 
-                  <p
+                  {/* <p
                     className={
                       isActive
                         ? `${styles.LinkText} ${styles.LinkText_Active}`
@@ -74,7 +45,7 @@ const Header: FC = () => {
                     }
                   >
                     Search
-                  </p>
+                  </p> */}
                 </div>
               );
             }}
@@ -84,16 +55,53 @@ const Header: FC = () => {
           <NavLink to="/" className={styles.BoxItem}>
             {function logoLink({ isActive }: { isActive: boolean }) {
               return (
-                <img
-                  src={isActive ? logoActive : logoInactive}
-                  alt="project vvid logo"
-                  height={40}
-                />
+                <div
+                  className={
+                    isActive
+                      ? `${styles.Container} ${styles.Container_Active}`
+                      : styles.Container
+                  }
+                >
+                  <img
+                    src={isActive ? logoActive : logoInactive}
+                    alt="project vvid logo"
+                    height={48}
+                  />
+                </div>
               );
             }}
           </NavLink>
         </div>
         <div className={styles.ProfileBox}>
+          <NavLink to="/favorites" className={styles.BoxItem}>
+            {function favoritesLink({ isActive }: { isActive: boolean }) {
+              return (
+                <div
+                  className={
+                    isActive
+                      ? `${styles.Container} ${styles.Container_Active}`
+                      : styles.Container
+                  }
+                >
+                  <img
+                    src={isActive ? likeActive : likeInactive}
+                    alt="liked vacancies icon"
+                    height={24}
+                  />
+                  {/* 
+                  <p
+                    className={
+                      isActive
+                        ? `${styles.LinkText} ${styles.LinkText_Active}`
+                        : styles.LinkText
+                    }
+                  >
+                    Favorites
+                  </p> */}
+                </div>
+              );
+            }}
+          </NavLink>
           <NavLink to="/profile" className={styles.BoxItem}>
             {function profileLink({ isActive }: { isActive: boolean }) {
               return (
@@ -109,7 +117,7 @@ const Header: FC = () => {
                     alt="profile icon"
                     height={24}
                   />
-                  <p
+                  {/* <p
                     className={
                       isActive
                         ? `${styles.LinkText} ${styles.LinkText_Active}`
@@ -117,7 +125,7 @@ const Header: FC = () => {
                     }
                   >
                     Profile
-                  </p>
+                  </p> */}
                 </div>
               );
             }}

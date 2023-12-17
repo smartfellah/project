@@ -1,6 +1,5 @@
 /* Header contains navbar */
 .Header {
-  height: 88px;
   /* margin-inline: 2%;
   margin-top: var(--l-1); */
   display: flex;
@@ -11,6 +10,7 @@
 
 /* Navbar contains boxes for each nav section*/
 .NavBar {
+  height: 88px;
   width: 1280px;
   margin: auto;
   display: flex;
@@ -20,6 +20,7 @@
 
 /* MenuBox contains two menu items: favorites and search */
 .MenuBox {
+  height: 100%;
   display: flex;
   flex: 1 1 33%;
   gap: var(--s-2);
@@ -28,6 +29,7 @@
 
 /* LogoBox contains one item: logo */
 .LogoBox {
+  height: 100%;
   display: flex;
   flex: 1 1 33%;
   justify-content: center;
@@ -35,6 +37,7 @@
 
 /* ProfileBox contains one item: profile */
 .ProfileBox {
+  height: 100%;
   display: flex;
   flex: 1 1 33%;
   justify-content: flex-end;
@@ -42,6 +45,7 @@
 
 /* Item contained in each of the boxes */
 .BoxItem {
+  height: 100%;
   display: flex;
   align-items: center;
   gap: var(--s-2);
@@ -49,13 +53,25 @@
 
 /* Container for elements that are inisde the box item */
 .Container {
+  height: 100%;
   display: flex;
   align-items: center;
-  padding: var(--s-5);
+  padding-inline: var(--s-5);
   gap: var(--s-2);
-  border-radius: var(--s-6);
+  /* border-radius: var(--s-6); */
 }
 .Container_Active {
+  background-color: var(--accent-secondary);
+}
+.LogoContainer {
+  height: 100%;
+  padding: var(--s-1);
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  border-radius: 10%;
+}
+.LogoContainer_Active {
   background-color: var(--accent-secondary);
 }
 
@@ -63,7 +79,7 @@
 .LinkText {
   font-family: "Inconsolata", monospace;
   font-weight: 400;
-  font-size: var(--s-6);
+  font-size: var(--s-4);
   color: var(--accent-secondary);
   text-align: center;
 }
