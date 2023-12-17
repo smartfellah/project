@@ -1,9 +1,21 @@
 .Header {
   height: 88px;
+  /* margin-inline: 2%;
+  margin-top: var(--l-1); */
   display: flex;
   align-items: center;
   justify-content: stretch;
-  background-color: var(--bg-secondary);
+  background-color: var(--accent-primary);
+}
+.LinkText {
+  font-family: "Inconsolata", monospace;
+  font-weight: 400;
+  font-size: var(--s-6);
+  color: var(--accent-secondary);
+  text-align: center;
+}
+.LinkText_Active {
+  color: var(--text-dark);
 }
 .NavBar {
   width: 1280px;
@@ -33,7 +45,12 @@
   align-items: center;
   gap: var(--s-2);
   padding: var(--s-5);
+  border-radius: var(--s-6);
 }
+.MenuBox-Item-Active {
+  background-color: var(--accent-secondary);
+}
+
 .ProfileBox-Item {
   display: flex;
   align-items: center;

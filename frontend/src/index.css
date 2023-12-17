@@ -16,10 +16,14 @@
   --l-4: 100px;
   --l-5: 120px;
   /*Color variables*/
-  --bg-primary: #131316;
-  --bg-secondary: #1c1c21;
-  --text-primary: #f2f2f3;
-  --text-secondary: #8585ad;
+  --bg-dark: #373a36;
+  --bg-primary: #e6e2dd;
+  --accent-primary: #d48166;
+  --accent-secondary: #ffffff;
+  --text-dark: #000000;
+  --text-light: #f9f9f9;
+  --text-grey: #e6e2dd;
+  background-color: var(--bg-primary);
 }
 body {
   height: 100%;
