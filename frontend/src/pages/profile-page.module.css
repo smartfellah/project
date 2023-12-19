@@ -1,0 +1,41 @@
+.Container {
+  width: 1280px;
+  margin: auto;
+}
+
+.MenuText {
+  width: 100%;
+  background-color: var(--bg-dark);
+  margin-top: var(--l-1);
+  padding-block: var(--s-4);
+  padding-left: var(--s-4);
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-weight: 400;
+  font-size: var(--l-1);
+  color: var(--bg-primary);
+}
+
+.OptionsContainer {
+}
+
+.Options {
+  background-color: var(--bg-primary);
+}
+
+.InfoBar {
+  display: flex;
+}
+
+.InfoBox1 {
+  flex-basis: 33.3333%;
+}
+.InfoBox2 {
+  flex-basis: 66.66666%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.InfoText {
+  padding: var(--s-4);
+  color: var(--bg-dark);
+}
