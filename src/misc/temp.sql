@@ -129,3 +129,30 @@ ALTER TABLE "messages" ADD FOREIGN KEY ("dialog_id") REFERENCES "dialog" ("id");
 ALTER TABLE "dialog" ADD FOREIGN KEY ("reply_id") REFERENCES "replies" ("id");
 
 ALTER TABLE "messages" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+
+ await queryInterface.createTable("users", {
+      id: {
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
+        type: Sequelize.DataTypes.BIGINT,
+      },
+      username: {
+        type: Sequelize.STRING,
+      },
+      email: {
+        type: Sequelize.STRING,
+      },
+      password: {
+        type: Sequelize.STRING,
+      },
+      role_id: {
+        type: Sequelize.BIGINT,
+      },
+      created_at: {
+        type: Sequelize.DATE,
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+      },
+    });

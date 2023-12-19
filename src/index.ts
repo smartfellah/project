@@ -5,6 +5,8 @@ import cookieParser from "cookie-parser";
 import compression from "compression";
 import cors from "cors";
 
+import { Sequelize } from "sequelize";
+
 const controller = require("./controller");
 
 const app = express();
