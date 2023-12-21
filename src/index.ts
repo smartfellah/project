@@ -12,10 +12,9 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-async function main() {
-  const allRoles = await prisma.roles.findMany();
-  console.log(allRoles);
-}
+const router = express.Router();
+
+async function main() {}
 
 main()
   .then(async () => {
@@ -40,7 +39,8 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 
 // routes
-app.get("/", main);
+//router.get("/", getMain);
+app.get("/", getMain);
 
 const server = http.createServer(app);
 
