@@ -9,27 +9,26 @@ datasource db {
 
 model Role{
   id    BigInt @id @default(autoincrement())
-  title String @db.VarChar(255) 
+  title String @db.VarChar(255)  @unique
   users User[]
   role_permisson RolePermission[]
 }
 
 model Permission{
   id    BigInt @id @default(autoincrement())
-  title String @db.VarChar(255)
+  title String @db.VarChar(255) @unique
   role_permisson RolePermission[]
 }
 
 model User{
   id BigInt @id @default(autoincrement())
-  title String @db.VarChar(255)
   username String @db.VarChar(255)
-  email String @db.VarChar(255)
+  email String @db.VarChar(255) @unique
   password String @db.VarChar(255)
   role Role @relation(fields: [roleId], references: [id])
   roleId BigInt
-  created_at DateTime
-  updated_at DateTime
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
   resumes Resume[]
   replies Reply[]
   vacancies Vacancy[]
@@ -44,8 +43,8 @@ model Resume{
     experience String
     location String
     is_active Boolean
-    created_at DateTime
-    updated_at DateTime
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
 }
 
 model Reply{
@@ -53,7 +52,7 @@ model Reply{
     user User @relation(fields: [userId], references: [id])
     userId BigInt
     message String
-    created_at DateTime
+    created_at DateTime @default(now())
 }
 
 model Company{
@@ -61,8 +60,8 @@ model Company{
     title String
     description String
     logo String
-    created_at DateTime
-    updated_at DateTime
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
     vacancies Vacancy[]
 }
 
@@ -77,8 +76,8 @@ model Vacancy{
     experience String
     location String
     is_active Boolean
-    created_at DateTime
-    updated_at DateTime
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
     vacancyTags VacancyTag[]
 }
 
