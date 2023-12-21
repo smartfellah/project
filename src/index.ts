@@ -1,49 +1,36 @@
-import express from "express";
+import Hapi from "@hapi/hapi";
 
-import { getMain } from "./controller";
+const server: Hapi.Server = Hapi.server({
+  port: process.env.PORT || 8080,
 
-import http from "http";
-import bodyParser from "body-parser";
-import cookieParser from "cookie-parser";
-import compression from "compression";
-import cors from "cors";
+  host: process.env.HOST || "localhost",
+});
 
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
-
-const router = express.Router();
-
-async function main() {}
-
-main()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
-  .catch(async (e) => {
-    console.error(e);
-    await prisma.$disconnect();
-    process.exit(1);
+export async function start(): Promise<Hapi.Server> {
+  server.route({
+    method: "GET",
+    path: "/",
+    handler: (_, h: Hapi.ResponseToolkit) => {
+      return h.response({ up: true }).code(200);
+    },
   });
 
-const app = express();
+  await server.start();
 
-//middleware
-app.use(
-  cors({
-    credentials: true,
-  })
-);
-app.use(compression());
-app.use(cookieParser());
-app.use(bodyParser.json());
+  return server;
+}
 
-// routes
-//router.get("/", getMain);
-app.get("/", getMain);
+process.on("unhandledRejection", (err) => {
+  console.log(err);
 
-const server = http.createServer(app);
-
-server.listen(8080, () => {
-  console.log("Server running on http://localhost:8080/");
+  process.exit(1);
 });
+
+start()
+  .then((server) => {
+    console.log(`Server running on ${server.info.uri}`);
+  })
+
+  .catch((err) => {
+    console.log(err);
+  });
