@@ -1,4 +1,5 @@
 import Hapi from "@hapi/hapi";
+import Joi from "@hapi/joi";
 // plugin to instantiate Prisma Client
 
 const usersPlugin = {
@@ -11,9 +12,14 @@ const usersPlugin = {
       {
         method: "POST",
 
-        path: "/user",
+        path: "/users",
 
         handler: registerHandler,
+        options: {
+          validate: {
+            payload: userInputValidator,
+          },
+        },
       },
     ]);
   },
@@ -27,6 +33,13 @@ interface UserInput {
   password: string;
   roleId: number;
 }
+
+const userInputValidator = Joi.object({
+  email: Joi.string().required(),
+  username: Joi.string().required(),
+  password: Joi.string().required(),
+  roleId: Joi.number().required(),
+});
 
 async function registerHandler(request: Hapi.Request, h: Hapi.ResponseToolkit) {
   try {

@@ -19,7 +19,7 @@ describe("POST /users - create user", () => {
     const response = await server.inject({
       method: "POST",
 
-      url: "/user",
+      url: "/users",
 
       payload: {
         email: `test-${Date.now()}@prisma.io`,
