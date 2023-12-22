@@ -11,7 +11,7 @@ const usersPlugin = {
       {
         method: "POST",
 
-        path: "/users",
+        path: "/user",
 
         handler: registerHandler,
       },
@@ -49,7 +49,14 @@ async function registerHandler(request: Hapi.Request, h: Hapi.ResponseToolkit) {
         roleId: payload.roleId,
       },
     });
-    return h.response(createdUser).code(201);
+
+    const responseObject = {
+      ...createdUser,
+      id: createdUser.id.toString(),
+      roleId: createdUser.roleId.toString(),
+    };
+
+    return h.response(responseObject).code(201);
   } catch (err) {
     console.log(err);
   }
