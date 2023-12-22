@@ -1,4 +1,5 @@
 import Hapi from "@hapi/hapi";
+import Joi from "@hapi/joi";
 import { string } from "@hapi/joi";
 
 interface UserInput {
@@ -7,6 +8,13 @@ interface UserInput {
   password: string;
   role: string;
 }
+
+const userInputValidation = Joi.object({
+  username: Joi.string().required(),
+  email: Joi.string().required(),
+  password: Joi.string().required(),
+  role: Joi.string().optional(),
+});
 
 async function createUserHandler(
   request: Hapi.Request,
@@ -55,6 +63,12 @@ const usersPlugin = {
         path: "/users",
 
         handler: createUserHandler,
+
+        options: {
+          validate: {
+            payload: userInputValidation,
+          },
+        },
       },
     ]);
   },
