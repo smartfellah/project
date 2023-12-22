@@ -1,5 +1,7 @@
 import Hapi from "@hapi/hapi";
 import Joi from "@hapi/joi";
+import { Boom, badImplementation } from "@hapi/boom";
+import { jsonString } from "../utils/jsonString";
 // plugin to instantiate Prisma Client
 
 const usersPlugin = {
@@ -18,6 +20,21 @@ const usersPlugin = {
         options: {
           validate: {
             payload: userInputValidator,
+          },
+        },
+      },
+      {
+        method: "GET",
+
+        path: "/users/{userId}",
+
+        handler: getUserHandler,
+
+        options: {
+          validate: {
+            params: Joi.object({
+              userId: Joi.number().integer(),
+            }),
           },
         },
       },
@@ -72,5 +89,30 @@ async function registerHandler(request: Hapi.Request, h: Hapi.ResponseToolkit) {
     return h.response(responseObject).code(201);
   } catch (err) {
     console.log(err);
+  }
+}
+
+async function getUserHandler(request: Hapi.Request, h: Hapi.ResponseToolkit) {
+  const { prisma } = request.server.app;
+
+  const userId = BigInt(request.params.userId);
+  console.log(userId);
+
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    });
+
+    if (!user) {
+      return h.response().code(404);
+    } else {
+      return h.response(jsonString(user)).code(200);
+    }
+  } catch (err) {
+    console.log(err);
+
+    return badImplementation();
   }
 }
