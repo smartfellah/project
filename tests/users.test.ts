@@ -31,9 +31,5 @@ describe("POST /users - create user", () => {
     // console.log(response);
 
     expect(response.statusCode).toEqual(201);
-
-    userId = JSON.parse(response.payload)?.id;
-
-    // expect(typeof userId === "number").toBeTruthy();
   });
 });
