@@ -4,86 +4,6 @@ import { Boom, badImplementation } from "@hapi/boom";
 import { jsonString } from "../utils/jsonString";
 // plugin to instantiate Prisma Client
 
-const usersPlugin = {
-  name: "app/users",
-
-  dependencies: ["prisma"],
-
-  register: async function (server: Hapi.Server) {
-    server.route([
-      {
-        method: "GET",
-
-        path: "/users/{userId}",
-
-        handler: getUserHandler,
-
-        options: {
-          validate: {
-            params: Joi.object({
-              userId: Joi.number().integer(),
-            }),
-          },
-        },
-      },
-      {
-        method: "POST",
-
-        path: "/users",
-
-        handler: registerHandler,
-        options: {
-          validate: {
-            payload: createUserValidator,
-          },
-        },
-      },
-      {
-        method: "DELETE",
-
-        path: "/users/{userId}",
-
-        handler: deleteUserHandler,
-
-        options: {
-          validate: {
-            params: Joi.object({
-              userId: Joi.number().integer(),
-            }),
-          },
-        },
-      },
-
-      {
-        method: "PUT",
-
-        path: "/users/{userId}",
-
-        handler: updateUserHandler,
-
-        options: {
-          validate: {
-            params: Joi.object({
-              userId: Joi.number().integer(),
-            }),
-
-            payload: updateUserValidator,
-          },
-        },
-      },
-    ]);
-  },
-};
-
-export default usersPlugin;
-
-interface UserInput {
-  email: string;
-  username: string;
-  password: string;
-  roleId: number;
-}
-
 const userInputValidator = Joi.object({
   email: Joi.string().alter({
     create: (schema) => schema.required(),
@@ -106,6 +26,86 @@ const userInputValidator = Joi.object({
 const createUserValidator = userInputValidator.tailor("create");
 
 const updateUserValidator = userInputValidator.tailor("update");
+
+const usersPlugin = {
+  name: "app/users",
+
+  dependencies: ["prisma"],
+
+  register: async function (server: Hapi.Server) {
+    server.route([
+      {
+        method: "GET",
+
+        path: "/users/{userId}",
+
+        handler: getUserHandler,
+
+        // options: {
+        //   validate: {
+        //     params: Joi.object({
+        //       userId: Joi.number().integer(),
+        //     }),
+        //   },
+        // },
+      },
+      {
+        method: "POST",
+
+        path: "/users",
+
+        handler: registerHandler,
+        // options: {
+        //   validate: {
+        //     payload: createUserValidator,
+        //   },
+        // },
+      },
+      {
+        method: "DELETE",
+
+        path: "/users/{userId}",
+
+        handler: deleteUserHandler,
+
+        // options: {
+        //   validate: {
+        //     params: Joi.object({
+        //       userId: Joi.number().integer(),
+        //     }),
+        //   },
+        // },
+      },
+
+      {
+        method: "PUT",
+
+        path: "/users/{userId}",
+
+        handler: updateUserHandler,
+
+        // options: {
+        //   validate: {
+        //     params: Joi.object({
+        //       userId: Joi.number().integer(),
+        //     }),
+
+        //     payload: updateUserValidator,
+        //   },
+        // },
+      },
+    ]);
+  },
+};
+
+export default usersPlugin;
+
+interface UserInput {
+  email: string;
+  username: string;
+  password: string;
+  roleId: number;
+}
 
 async function registerHandler(request: Hapi.Request, h: Hapi.ResponseToolkit) {
   try {
