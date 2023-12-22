@@ -27,12 +27,3 @@ process.on("unhandledRejection", (err) => {
 
   process.exit(1);
 });
-
-startServer()
-  .then((server) => {
-    console.log(`Server running on ${server.info.uri}`);
-  })
-
-  .catch((err) => {
-    console.log(err);
-  });
