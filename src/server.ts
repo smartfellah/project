@@ -1,8 +1,8 @@
 import Hapi from "@hapi/hapi";
 
 import status from "./plugins/status";
-import prismaPlugin from "plugins/prisma";
-import usersPlugin from "plugins/users";
+import prismaPlugin from "./plugins/prisma";
+import usersPlugin from "./plugins/users";
 
 const server: Hapi.Server = Hapi.server({
   port: process.env.PORT || 8080,
