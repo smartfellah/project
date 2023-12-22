@@ -12,18 +12,6 @@ const usersPlugin = {
   register: async function (server: Hapi.Server) {
     server.route([
       {
-        method: "POST",
-
-        path: "/users",
-
-        handler: registerHandler,
-        options: {
-          validate: {
-            payload: userInputValidator,
-          },
-        },
-      },
-      {
         method: "GET",
 
         path: "/users/{userId}",
@@ -35,6 +23,51 @@ const usersPlugin = {
             params: Joi.object({
               userId: Joi.number().integer(),
             }),
+          },
+        },
+      },
+      {
+        method: "POST",
+
+        path: "/users",
+
+        handler: registerHandler,
+        options: {
+          validate: {
+            payload: createUserValidator,
+          },
+        },
+      },
+      {
+        method: "DELETE",
+
+        path: "/users/{userId}",
+
+        handler: deleteUserHandler,
+
+        options: {
+          validate: {
+            params: Joi.object({
+              userId: Joi.number().integer(),
+            }),
+          },
+        },
+      },
+
+      {
+        method: "PUT",
+
+        path: "/users/{userId}",
+
+        handler: updateUserHandler,
+
+        options: {
+          validate: {
+            params: Joi.object({
+              userId: Joi.number().integer(),
+            }),
+
+            payload: updateUserValidator,
           },
         },
       },
@@ -52,11 +85,27 @@ interface UserInput {
 }
 
 const userInputValidator = Joi.object({
-  email: Joi.string().required(),
-  username: Joi.string().required(),
-  password: Joi.string().required(),
-  roleId: Joi.number().required(),
+  email: Joi.string().alter({
+    create: (schema) => schema.required(),
+    update: (schema) => schema.optional(),
+  }),
+  username: Joi.string().alter({
+    create: (schema) => schema.required(),
+    update: (schema) => schema.optional(),
+  }),
+  password: Joi.string().alter({
+    create: (schema) => schema.required(),
+    update: (schema) => schema.optional(),
+  }),
+  roleId: Joi.number().alter({
+    create: (schema) => schema.required(),
+    update: (schema) => schema.optional(),
+  }),
 });
+
+const createUserValidator = userInputValidator.tailor("create");
+
+const updateUserValidator = userInputValidator.tailor("update");
 
 async function registerHandler(request: Hapi.Request, h: Hapi.ResponseToolkit) {
   try {
@@ -114,5 +163,55 @@ async function getUserHandler(request: Hapi.Request, h: Hapi.ResponseToolkit) {
     console.log(err);
 
     return badImplementation();
+  }
+}
+
+async function deleteUserHandler(
+  request: Hapi.Request,
+  h: Hapi.ResponseToolkit
+) {
+  const { prisma } = request.server.app;
+
+  const userId = BigInt(request.params.userId);
+
+  try {
+    await prisma.user.delete({
+      where: {
+        id: userId,
+      },
+    });
+
+    return h.response().code(204);
+  } catch (err) {
+    console.log(err);
+
+    return h.response().code(500);
+  }
+}
+
+async function updateUserHandler(
+  request: Hapi.Request,
+  h: Hapi.ResponseToolkit
+) {
+  const { prisma } = request.server.app;
+
+  const userId = BigInt(request.params.userId);
+
+  const payload = request.payload as Partial<UserInput>;
+
+  try {
+    console.log(userId);
+    const updatedUser = await prisma.user.update({
+      where: {
+        id: userId,
+      },
+
+      data: payload,
+    });
+
+    return h.response(jsonString(updatedUser)).code(200);
+  } catch (err) {
+    console.log(err);
+    return h.response().code(500);
   }
 }

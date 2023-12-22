@@ -2,7 +2,7 @@ import { createServer } from "../src/server";
 
 import Hapi from "@hapi/hapi";
 
-describe("POST /users - create user", () => {
+describe("users endpoints", () => {
   let server: Hapi.Server;
 
   beforeAll(async () => {
@@ -25,7 +25,7 @@ describe("POST /users - create user", () => {
         email: `test-${Date.now()}@prisma.io`,
         username: "testusername",
         password: "testpassword",
-        roleId: 1, // Assuming `1` is a valid role ID
+        roleId: 1,
       },
     });
     // console.log(response);
@@ -33,7 +33,7 @@ describe("POST /users - create user", () => {
     expect(response.statusCode).toEqual(201);
 
     userId = JSON.parse(response.payload)?.id;
-    console.log(userId);
+    // console.log(userId);
   });
 
   test("create user validation", async () => {
@@ -74,5 +74,55 @@ describe("POST /users - create user", () => {
     const user = JSON.parse(response.payload);
 
     expect(user.id).toBe(userId);
+  });
+
+  test("update user fails with invalid userId parameter", async () => {
+    const response = await server.inject({
+      method: "PUT",
+
+      url: `/users/aa22`,
+    });
+
+    expect(response.statusCode).toEqual(400);
+  });
+
+  test("update user", async () => {
+    const updatedUsername = "username-UPDATED";
+
+    const response = await server.inject({
+      method: "PUT",
+
+      url: `/users/${userId}`,
+
+      payload: {
+        username: updatedUsername,
+      },
+    });
+
+    expect(response.statusCode).toEqual(200);
+
+    const user = JSON.parse(response.payload);
+
+    expect(user.username).toEqual(updatedUsername);
+  });
+
+  test("delete user fails with invalid userId parameter", async () => {
+    const response = await server.inject({
+      method: "DELETE",
+
+      url: `/users/aa22`,
+    });
+
+    expect(response.statusCode).toEqual(400);
+  });
+
+  test("delete user", async () => {
+    const response = await server.inject({
+      method: "DELETE",
+
+      url: `/users/${userId}`,
+    });
+
+    expect(response.statusCode).toEqual(204);
   });
 });
