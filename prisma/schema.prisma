@@ -57,7 +57,7 @@ model Reply{
 
 model Company{
     id BigInt @id @default(autoincrement())
-    title String
+    title String @unique
     description String
     logo String
     created_at DateTime @default(now())
