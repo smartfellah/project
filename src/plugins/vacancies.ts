@@ -122,17 +122,29 @@ async function getVacanciesHandler(
   const { prisma } = request.server.app;
 
   try {
-    const vacancies = await prisma.vacancy.findMany({});
+    console.log(request.url.searchParams);
+    const params = request.url.searchParams;
+    console.log(params);
+    const q = params.get("q");
+    console.log(q);
 
-    if (!vacancies) {
-      return h.response().code(404);
-    } else {
-      return h.response(jsonString(vacancies)).code(200);
+    if (!q || typeof q !== "string") {
+      const vacancies = await prisma.vacancy.findMany({});
+      return h.response(jsonString({ vacancies })).code(200);
     }
-  } catch (err) {
-    console.log(err);
 
-    return badImplementation();
+    // Query the database using Prisma to get vacancies
+    const vacancies = await prisma.vacancy.findMany({
+      where: {
+        title: {
+          contains: q, // Use 'contains' for case-insensitive search
+        },
+      },
+    });
+
+    return h.response(jsonString({ vacancies })).code(200);
+  } catch (error) {
+    return h.response().code(404);
   }
 }
 

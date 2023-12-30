@@ -1,10 +1,15 @@
 import styles from "./main-page.module.css";
 
-import { createSearchParams, useNavigate } from "react-router-dom";
+import {
+  useSearchParams,
+  createSearchParams,
+  useNavigate,
+} from "react-router-dom";
 
 import { FC, useState } from "react";
 
 const MainPage: FC = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const [value, setValue] = useState<string>("");
 
@@ -13,12 +18,13 @@ const MainPage: FC = () => {
   }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    setSearchParams(value);
     event.preventDefault();
 
     navigate({
       pathname: "search",
       search: `?${createSearchParams({
-        search: value,
+        q: value,
       })}`,
     });
   };
