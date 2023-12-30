@@ -50,6 +50,21 @@ const usersPlugin = {
         // },
       },
       {
+        method: "GET",
+
+        path: "/users",
+
+        handler: getUsersHandler,
+
+        // options: {
+        //   validate: {
+        //     params: Joi.object({
+        //       userId: Joi.number().integer(),
+        //     }),
+        //   },
+        // },
+      },
+      {
         method: "POST",
 
         path: "/users",
@@ -111,7 +126,10 @@ async function registerHandler(request: Hapi.Request, h: Hapi.ResponseToolkit) {
   try {
     const { prisma } = request.server.app;
 
-    const payload = request.payload as UserInput;
+    let payload = request.payload as any;
+    payload = JSON.parse(payload);
+
+    console.log(payload);
 
     const createdUser = await prisma.user.upsert({
       where: { email: payload.email },
@@ -158,6 +176,24 @@ async function getUserHandler(request: Hapi.Request, h: Hapi.ResponseToolkit) {
       return h.response().code(404);
     } else {
       return h.response(jsonString(user)).code(200);
+    }
+  } catch (err) {
+    console.log(err);
+
+    return badImplementation();
+  }
+}
+
+async function getUsersHandler(request: Hapi.Request, h: Hapi.ResponseToolkit) {
+  const { prisma } = request.server.app;
+
+  try {
+    const users = await prisma.user.findMany({});
+
+    if (!users) {
+      return h.response().code(404);
+    } else {
+      return h.response(jsonString(users)).code(200);
     }
   } catch (err) {
     console.log(err);

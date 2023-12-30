@@ -3,23 +3,30 @@
   margin: auto;
 }
 
-.MenuText {
+.TitleBox {
   width: 100%;
   background-color: var(--bg-dark);
   margin-top: var(--l-1);
   padding-block: var(--s-4);
-  padding-left: var(--s-4);
+  /* padding-left: var(--s-4); */
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-weight: 400;
   font-size: var(--l-1);
   color: var(--bg-primary);
 }
 
+.Title {
+  padding-left: var(--s-4);
+}
+
 .OptionsContainer {
+  width: 100%;
 }
 
 .Options {
   background-color: var(--bg-primary);
+  width: 90%;
+  margin: auto; 
 }
 
 .InfoBar {
@@ -38,4 +45,35 @@
 .InfoText {
   padding: var(--s-4);
   color: var(--bg-dark);
+}
+
+.AddUserForm {
+  width: 100%;
+  background-color: var(--bg-dark);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--l-1);
+}
+
+.InfoBox_2 {
+  background-color: var(--accent-primary);
+}
+
+.PostButton {
+  margin-block: var(--s-4);
+  margin-right: var(--s-4);
+  padding-inline: var(--l-2);
+  padding-block: var(--s-2);
+  background-color: var(--accent-primary);
+  color: var(--bg-primary);
+  border-radius: var(--s-4);
+}
+
+.InputText {
+  color: var(--bg-dark);
+  border-radius: var(--s-4);
+  background-color: var(--bg-primary);
+  padding: var(--s-1);
+  padding-inline: var(--s-2);
 }
