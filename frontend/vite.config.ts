@@ -6,6 +6,7 @@ import macrosPlugin from "vite-plugin-babel-macros";
 export default defineConfig({
   plugins: [macrosPlugin(), react()],
   server: {
+    host: true,
     port: 3000,
     proxy: {
       "/api": {
