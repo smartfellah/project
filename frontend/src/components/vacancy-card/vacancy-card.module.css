@@ -1,0 +1,44 @@
+.VacanciesListContainer {
+  margin: auto;
+  width: 1280px;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+}
+.VacancyItem {
+  padding: var(--s-4);
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition-property: transform;
+  transition-duration: 0.5s;
+  border-bottom: 1px solid rgb(171, 165, 165);
+  border-left: 1px solid rgb(171, 165, 165);
+}
+.VacancyItem:hover {
+  transform: perspective(900px) rotateY(10deg);
+}
+.VacancyTitle {
+  padding: var(--s-4);
+  background-color: var(--bg-dark);
+  color: var(--bg-primary);
+  border-radius: 0 var(--s-4) 0 0;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+.DescriptionContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  margin-top: var(--s-4);
+}
+
+.VacancyExp {
+  padding-left: var(--s-2);
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+.VacancyLoc {
+  padding-left: var(--s-2);
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}

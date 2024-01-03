@@ -1,6 +1,7 @@
 import styles from "./search-page.module.css";
 import { FC, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { VacancyCard } from "../components/vacancy-card/vacancy-card";
 
 const SearchPage: FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -63,25 +64,7 @@ const SearchPage: FC = () => {
       <div>
         <ul className={styles.VacanciesList}>
           {isLoaded && !error
-            ? items.map((item) => (
-                <li className={styles.VacanciesListContainer}>
-                  <article className={styles.VacancyItem} key={item.id}>
-                    <h2 className={styles.VacancyTitle}>{item.title}</h2>
-                    <ol className={styles.DescriptionContainer}>
-                      <li>
-                        <p className={styles.VacancyExp}>
-                          Experience: {item.experience}
-                        </p>
-                      </li>
-                      <li>
-                        <p className={styles.VacancyLoc}>
-                          Location: {item.location}
-                        </p>
-                      </li>
-                    </ol>
-                  </article>
-                </li>
-              ))
+            ? items.map((item) => <VacancyCard item={item}></VacancyCard>)
             : null}
         </ul>
       </div>
@@ -89,7 +72,7 @@ const SearchPage: FC = () => {
   );
 };
 
-interface IVacancy {
+export interface IVacancy {
   id: number;
   userId: number;
   companyId: number;

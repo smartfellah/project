@@ -11,6 +11,7 @@ import { ProfilePage } from "./pages/profile-page";
 import { SearchPage } from "./pages/search-page";
 import { LoginPage } from "./pages/login-page";
 import { SignupPage } from "./pages/signup-page";
+import { SingleVacancy } from "./pages/single-vacancy-page";
 
 function App() {
   //const [count, setCount] = useState(0);
@@ -23,6 +24,7 @@ function App() {
         <Route path="/favorites" element={<FavoritesPage />}></Route>
         <Route path="/profile" element={<ProfilePage />}></Route>
         <Route path="/search" element={<SearchPage />}></Route>
+        <Route path="vacancies/:id" element={<SingleVacancy />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/signup" element={<SignupPage />}></Route>
       </Routes>
