@@ -86,8 +86,11 @@ const SearchPage: FC = () => {
 
 export interface IVacancy {
   id: number;
+  salary: string;
   company: {
     title: string;
+    logo: string;
+    description: string;
   };
   title: string;
   content: string;

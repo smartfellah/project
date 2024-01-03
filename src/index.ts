@@ -40,8 +40,11 @@ app.get("/vacancies/:vacancyId", async (req, res) => {
       company: {
         select: {
           title: true,
+          logo: true,
+          description: true,
         },
       },
+      salary: true,
       title: true,
       content: true,
       experience: true,

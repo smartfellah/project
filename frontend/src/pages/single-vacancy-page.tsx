@@ -10,6 +10,7 @@ export const SingleVacancy = () => {
     fetch(`http://localhost:8080/vacancies/${location.state.itemId}`)
       .then((res) => res.json())
       .then((result) => {
+        console.log(result.salary);
         setVacancy(result);
       });
   }, [location.state.itemId]);
@@ -19,7 +20,9 @@ export const SingleVacancy = () => {
         <div className={styles.MainContent}>
           <div className={styles.VacancyCard}>
             <h1 className={styles.CardTitle}>{vacancy.title}</h1>
-            <p className={styles.CardExperience}>{vacancy.experience}</p>
+            <h2 className={styles.CardSalary}>{vacancy.salary}</h2>
+            <p className={styles.CardOtherInfo}>{vacancy.location}</p>
+            <p className={styles.CardOtherInfo}>{vacancy.experience}</p>
           </div>
           <article className={styles.CardDescription}>
             {vacancy.content}
@@ -27,7 +30,15 @@ export const SingleVacancy = () => {
         </div>
         <div className={styles.SideContent}>
           <div className={styles.CompanyCard}>
-            <h2>{vacancy.company.title}</h2>
+            <img
+              className={styles.CardLogo}
+              src={vacancy.company.logo}
+              alt="logo"
+            />
+            <h2 className={styles.CompanyTitle}>{vacancy.company.title}</h2>
+            <p className={styles.CompanyDescription}>
+              {vacancy.company.description}
+            </p>
           </div>
         </div>
       </div>
