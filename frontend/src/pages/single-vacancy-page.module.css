@@ -1,0 +1,45 @@
+.Container {
+  font-family: "Montserrat", sans-serif;
+  width: var(--page-container-width);
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  margin-top: var(--l-2);
+}
+
+.MainContent {
+  flex-basis: 60%;
+}
+.VacancyCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  border: 1px solid var(--bg-dark);
+  padding: var(--l-1) var(--s-4);
+}
+.CardTitle {
+  font-weight: bold;
+  font-size: var(--l-1);
+}
+.CardSalary {
+  font-size: var(--s-6);
+}
+.CardOtherInfo {
+  font-size: var(--s-4);
+}
+.CardDescription {
+  margin-top: var(--l-1);
+  line-height: var(--s-6);
+  text-align: start;
+}
+
+.SideContent {
+  flex-basis: 30%;
+}
+.CompanyCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  border: 1px solid var(--bg-dark);
+  padding: var(--l-1) var(--s-4);
+}

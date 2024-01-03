@@ -30,6 +30,36 @@ app.get("/vacancies", async (req, res) => {
   res.status(200).json(vacancies);
 });
 
+app.get("/vacancies/:vacancyId", async (req, res) => {
+  const vacancyId = Number(req.params.vacancyId);
+
+  const vacancy = await prisma.vacancy.findUnique({
+    select: {
+      id: true,
+
+      company: {
+        select: {
+          title: true,
+        },
+      },
+      title: true,
+      content: true,
+      experience: true,
+      location: true,
+      is_active: true,
+      created_at: true,
+      updated_at: true,
+    },
+    where: { id: vacancyId },
+  });
+
+  if (!vacancy) {
+    res.status(404).json({ error: "Vacancy not found" });
+  } else {
+    res.status(200).json(vacancy);
+  }
+});
+
 const server = app.listen(port, () =>
   console.log(`
 🚀 Server ready at: http://localhost: ${port}`)

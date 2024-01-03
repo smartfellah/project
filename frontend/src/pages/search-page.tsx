@@ -1,9 +1,10 @@
 import styles from "./search-page.module.css";
 import { FC, useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { VacancyCard } from "../components/vacancy-card/vacancy-card";
 
 const SearchPage: FC = () => {
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   //used for fetching
   const [error, setError] = useState<boolean>(false);
@@ -39,7 +40,7 @@ const SearchPage: FC = () => {
 
   useEffect(() => {
     setSearchParams({ q: q });
-  }, [q]);
+  }, [q, setSearchParams]);
   return (
     <div>
       <div className={styles.SearchFormContainer}>
@@ -64,7 +65,18 @@ const SearchPage: FC = () => {
       <div>
         <ul className={styles.VacanciesList}>
           {isLoaded && !error
-            ? items.map((item) => <VacancyCard item={item}></VacancyCard>)
+            ? items.map((item) => (
+                <VacancyCard
+                  goToVacancy={(e) => {
+                    e.preventDefault();
+                    navigate(`/vacancies/${item.id}`, {
+                      state: { itemId: item.id },
+                    });
+                  }}
+                  item={item}
+                  key={item.id}
+                ></VacancyCard>
+              ))
             : null}
         </ul>
       </div>
@@ -74,8 +86,9 @@ const SearchPage: FC = () => {
 
 export interface IVacancy {
   id: number;
-  userId: number;
-  companyId: number;
+  company: {
+    title: string;
+  };
   title: string;
   content: string;
   experience: string;
