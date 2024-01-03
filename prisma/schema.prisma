@@ -71,6 +71,7 @@ model Vacancy{
     userId Int
     company Company @relation(fields: [companyId], references: [id])
     companyId Int
+    salary String @default("not specidied")
     title String
     content String
     experience String
