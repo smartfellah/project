@@ -1,15 +1,6 @@
-/*
-  Warnings:
-
-  - You are about to drop the `roles` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropTable
-DROP TABLE "roles";
-
 -- CreateTable
 CREATE TABLE "Role" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "title" VARCHAR(255) NOT NULL,
 
     CONSTRAINT "Role_pkey" PRIMARY KEY ("id")
@@ -17,7 +8,7 @@ CREATE TABLE "Role" (
 
 -- CreateTable
 CREATE TABLE "Permission" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "title" VARCHAR(255) NOT NULL,
 
     CONSTRAINT "Permission_pkey" PRIMARY KEY ("id")
@@ -25,13 +16,12 @@ CREATE TABLE "Permission" (
 
 -- CreateTable
 CREATE TABLE "User" (
-    "id" BIGSERIAL NOT NULL,
-    "title" VARCHAR(255) NOT NULL,
+    "id" SERIAL NOT NULL,
     "username" VARCHAR(255) NOT NULL,
     "email" VARCHAR(255) NOT NULL,
     "password" VARCHAR(255) NOT NULL,
-    "roleId" BIGINT NOT NULL,
-    "created_at" TIMESTAMP(3) NOT NULL,
+    "roleId" INTEGER NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
@@ -39,14 +29,14 @@ CREATE TABLE "User" (
 
 -- CreateTable
 CREATE TABLE "Resume" (
-    "id" BIGSERIAL NOT NULL,
-    "userId" BIGINT NOT NULL,
+    "id" SERIAL NOT NULL,
+    "userId" INTEGER NOT NULL,
     "title" TEXT NOT NULL,
     "content" TEXT NOT NULL,
     "experience" TEXT NOT NULL,
     "location" TEXT NOT NULL,
     "is_active" BOOLEAN NOT NULL,
-    "created_at" TIMESTAMP(3) NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Resume_pkey" PRIMARY KEY ("id")
@@ -54,21 +44,21 @@ CREATE TABLE "Resume" (
 
 -- CreateTable
 CREATE TABLE "Reply" (
-    "id" BIGSERIAL NOT NULL,
-    "userId" BIGINT NOT NULL,
+    "id" SERIAL NOT NULL,
+    "userId" INTEGER NOT NULL,
     "message" TEXT NOT NULL,
-    "created_at" TIMESTAMP(3) NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Reply_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Company" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "logo" TEXT NOT NULL,
-    "created_at" TIMESTAMP(3) NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Company_pkey" PRIMARY KEY ("id")
@@ -76,15 +66,15 @@ CREATE TABLE "Company" (
 
 -- CreateTable
 CREATE TABLE "Vacancy" (
-    "id" BIGSERIAL NOT NULL,
-    "userId" BIGINT NOT NULL,
-    "companyId" BIGINT NOT NULL,
+    "id" SERIAL NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "companyId" INTEGER NOT NULL,
     "title" TEXT NOT NULL,
     "content" TEXT NOT NULL,
     "experience" TEXT NOT NULL,
     "location" TEXT NOT NULL,
     "is_active" BOOLEAN NOT NULL,
-    "created_at" TIMESTAMP(3) NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Vacancy_pkey" PRIMARY KEY ("id")
@@ -92,20 +82,59 @@ CREATE TABLE "Vacancy" (
 
 -- CreateTable
 CREATE TABLE "VacancyTag" (
-    "id" BIGSERIAL NOT NULL,
-    "vacancyId" BIGINT NOT NULL,
+    "id" SERIAL NOT NULL,
+    "vacancyId" INTEGER NOT NULL,
 
     CONSTRAINT "VacancyTag_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "RolePermission" (
-    "id" BIGSERIAL NOT NULL,
-    "roleId" BIGINT NOT NULL,
-    "permissionId" BIGINT NOT NULL,
+    "id" SERIAL NOT NULL,
+    "roleId" INTEGER NOT NULL,
+    "permissionId" INTEGER NOT NULL,
 
     CONSTRAINT "RolePermission_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Role_id_key" ON "Role"("id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Role_title_key" ON "Role"("title");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Permission_id_key" ON "Permission"("id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Permission_title_key" ON "Permission"("title");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_id_key" ON "User"("id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Resume_id_key" ON "Resume"("id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Reply_id_key" ON "Reply"("id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Company_id_key" ON "Company"("id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Company_title_key" ON "Company"("title");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Vacancy_id_key" ON "Vacancy"("id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "VacancyTag_id_key" ON "VacancyTag"("id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "RolePermission_id_key" ON "RolePermission"("id");
 
 -- AddForeignKey
 ALTER TABLE "User" ADD CONSTRAINT "User_roleId_fkey" FOREIGN KEY ("roleId") REFERENCES "Role"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

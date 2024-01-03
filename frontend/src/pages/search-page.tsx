@@ -1,55 +1,16 @@
-import { useNavigate } from "react-router";
 import styles from "./search-page.module.css";
 import { FC, useEffect, useState } from "react";
-import { createSearchParams } from "react-router-dom";
-
 import { useSearchParams } from "react-router-dom";
-
-import data from "./fake-vacancies.json";
-
-interface IVacancy {
-  id: number;
-  userId: number;
-  companyId: number;
-  title: string;
-  content: string;
-  experience: string;
-  location: string;
-}
-
-interface ISuggestion {
-  id: number;
-  userId: number;
-  companyId: number;
-  title: string;
-  content: string;
-  experience: string;
-  location: string;
-}
 
 const SearchPage: FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   //used for fetching
   const [error, setError] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [items, setItems] = useState([
-    {
-      id: 0,
-      userId: 0,
-      companyId: 0,
-      title: "",
-      content: "",
-      experience: "",
-      location: "",
-    },
-  ]);
-  const [suggestions, setSuggestions] = useState<ISuggestion>();
-
-  //set search query to empty string
+  const [items, setItems] = useState([] as IVacancy[]);
 
   const p = searchParams.get("q");
-  const [q, setQ] = useState(p);
-  // const [searchParam] = useState(["capital", "name"]);
+  const [q, setQ] = useState((p as string) || "");
 
   function handleChange(event: React.FormEvent<HTMLInputElement>) {
     // setIsLoaded(false);
@@ -63,7 +24,8 @@ const SearchPage: FC = () => {
       .then((res) => res.json())
       .then(
         (result) => {
-          if (result) setItems([...result.vacancies]);
+          console.log(result);
+          if (result) setItems([...result]);
           setError(false);
         },
         (error) => {
@@ -77,7 +39,6 @@ const SearchPage: FC = () => {
   useEffect(() => {
     setSearchParams({ q: q });
   }, [q]);
-  console.log(items);
   return (
     <div>
       <div className={styles.SearchFormContainer}>
@@ -127,5 +88,25 @@ const SearchPage: FC = () => {
     </div>
   );
 };
+
+interface IVacancy {
+  id: number;
+  userId: number;
+  companyId: number;
+  title: string;
+  content: string;
+  experience: string;
+  location: string;
+}
+
+interface ISuggestion {
+  id: number;
+  userId: number;
+  companyId: number;
+  title: string;
+  content: string;
+  experience: string;
+  location: string;
+}
 
 export { SearchPage };

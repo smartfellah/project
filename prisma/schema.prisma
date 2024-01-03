@@ -8,25 +8,25 @@ datasource db {
 }
 
 model Role{
-  id    BigInt @id @default(autoincrement())
+  id    Int @id @default(autoincrement()) @unique
   title String @db.VarChar(255)  @unique
   users User[]
   role_permisson RolePermission[]
 }
 
 model Permission{
-  id    BigInt @id @default(autoincrement())
+  id    Int @id @default(autoincrement()) @unique
   title String @db.VarChar(255) @unique
   role_permisson RolePermission[]
 }
 
 model User{
-  id BigInt @id @default(autoincrement())
+  id Int @id @default(autoincrement()) @unique
   username String @db.VarChar(255)
   email String @db.VarChar(255) @unique
   password String @db.VarChar(255)
   role Role @relation(fields: [roleId], references: [id])
-  roleId BigInt
+  roleId Int
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   resumes Resume[]
@@ -35,9 +35,9 @@ model User{
 }
 
 model Resume{
-    id BigInt @id @default(autoincrement())
+    id Int @id @default(autoincrement()) @unique
     user User @relation(fields: [userId], references: [id])
-    userId BigInt
+    userId Int
     title String 
     content String
     experience String
@@ -48,15 +48,15 @@ model Resume{
 }
 
 model Reply{
-    id BigInt @id @default(autoincrement())
+    id Int @id @default(autoincrement()) @unique
     user User @relation(fields: [userId], references: [id])
-    userId BigInt
+    userId Int
     message String
     created_at DateTime @default(now())
 }
 
 model Company{
-    id BigInt @id @default(autoincrement())
+    id Int @id @default(autoincrement()) @unique
     title String @unique
     description String
     logo String
@@ -66,11 +66,11 @@ model Company{
 }
 
 model Vacancy{
-    id BigInt @id @default(autoincrement())
+    id Int @id @default(autoincrement()) @unique
     user User @relation(fields: [userId], references: [id])
-    userId BigInt
+    userId Int
     company Company @relation(fields: [companyId], references: [id])
-    companyId BigInt
+    companyId Int
     title String
     content String
     experience String
@@ -82,15 +82,15 @@ model Vacancy{
 }
 
 model VacancyTag{
-  id BigInt @id @default(autoincrement())
+  id Int @id @default(autoincrement()) @unique
   vacancy Vacancy @relation(fields: [vacancyId], references: [id])
-  vacancyId BigInt
+  vacancyId Int
 }
 
 model RolePermission{
-  id BigInt @id @default(autoincrement())
+  id Int @id @default(autoincrement()) @unique
   role Role @relation(fields: [roleId], references: [id])
   permission Permission @relation(fields: [permissionId], references: [id])
-  roleId BigInt
-  permissionId BigInt
+  roleId Int
+  permissionId Int
 }
