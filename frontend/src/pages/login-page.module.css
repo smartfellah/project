@@ -1,0 +1,27 @@
+.Container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-4);
+}
+.Form {
+  margin-top: var(--l-1);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+}
+.Button {
+  padding: var(--s-4);
+  border: 1px solid var(--bg-dark);
+}
+.Button:hover {
+  background-color: var(--accent-primary);
+  color: var(--text-light);
+}
+.SecondaryButton {
+  color: var(--text-grey);
+}
+.SecondaryButton:hover {
+  color: var(--accent-primary);
+}
