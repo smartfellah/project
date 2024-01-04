@@ -193,7 +193,10 @@ const SearchPage: FC = () => {
           </div>
         </div>
       </div>
-      <div>
+      <div className={styles.MainContainer}>
+        <section className={styles.FilterSection}>
+          <h2>Filters</h2>
+        </section>
         <ul className={styles.VacanciesList}>
           {isLoaded && !error
             ? vacancies.map((item) => (

@@ -96,7 +96,21 @@
   text-align: center;
 }
 
+.MainContainer {
+  margin: auto;
+  width: var(--page-container-width);
+  display: flex;
+  justify-content: center;
+}
+.FilterSection {
+  margin-block: var(--l-2);
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+}
+
 .VacanciesList {
+  width: 65%;
   margin-block: var(--l-2);
   display: flex;
   flex-direction: column;
