@@ -137,7 +137,7 @@ app.get("/vacancy-suggestions", async (req, res) => {
 
   const suggestions = await prisma.vacancy.findMany({
     where: {
-      title: { contains: q.toString(), mode: "insensitive" },
+      title: { startsWith: q.toString(), mode: "insensitive" },
     },
     take: 5, // Limit the number of suggestions to 5
     select: {

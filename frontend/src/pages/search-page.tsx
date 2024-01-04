@@ -159,7 +159,11 @@ const SearchPage: FC = () => {
   // Render the filtered suggestions
   const renderSuggestions = () => {
     return suggestions.map((suggestion) => (
-      <div className={styles.Suggestion} key={suggestion.title}>
+      <div
+        onClick={() => setQ(suggestion.title)}
+        className={styles.Suggestion}
+        key={suggestion.title}
+      >
         {suggestion.title}
       </div>
     ));
