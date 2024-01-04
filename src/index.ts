@@ -18,16 +18,28 @@ app.use(
 );
 
 app.get("/vacancies", async (req, res) => {
-  if (!req.query?.q) {
-    const vacancies = await prisma.vacancy.findMany();
-    res.status(200).json(vacancies);
-    return;
-  }
-  const q = req.query?.q.toString() || "";
+  const { q, page = 1, limit = 10 } = req.query;
+
+  const skip = (Number(page) - 1) * Number(limit);
+  const take = Number(limit);
+
+  const where = q ? { title: { contains: q.toString() } } : {};
+
+  const totalCount = await prisma.vacancy.count({ where });
+  const totalPages = Math.ceil(totalCount / Number(limit));
+
   const vacancies = await prisma.vacancy.findMany({
-    where: { title: { contains: q } },
+    where,
+    skip,
+    take,
   });
-  res.status(200).json(vacancies);
+
+  res.status(200).json({
+    vacancies,
+    totalCount,
+    totalPages,
+    currentPage: page,
+  });
 });
 
 app.get("/vacancies/:vacancyId", async (req, res) => {

@@ -73,3 +73,33 @@
   flex-direction: column;
   gap: var(--l-1);
 }
+
+.PaginationContainer {
+  font-family: var(--font-family-main);
+  width: fit-content;
+  display: flex;
+  gap: var(--s-4);
+  margin: 0 auto;
+}
+
+.PaginationButton {
+  cursor: pointer;
+  color: var(--text-dark);
+  padding: var(--s-4);
+  padding-inline: var(--s-5);
+}
+.ActivePaginationButton {
+  cursor: pointer;
+  color: var(--text-light);
+  padding: var(--s-4);
+  padding-inline: var(--s-5);
+  background-color: var(--accent-primary);
+}
+
+.PrevActive {
+  cursor: pointer;
+  color: var(--text-dark);
+}
+.PrevInactive {
+  color: var(--text-grey);
+}
