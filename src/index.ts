@@ -1,21 +1,110 @@
-import { Prisma, PrismaClient } from "@prisma/client";
-import express from "express";
+import { PrismaClient } from "@prisma/client";
+import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
-
-//utils
-import { jsonString } from "./utils/jsonString";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const prisma = new PrismaClient();
 const app = express();
 
 const port = process.env.PORT || 8080;
+const secretKey = process.env.JWT_SECRET_KEY || "secret";
 
 app.use(express.json());
-app.use(
-  cors({
-    origin: "*",
-  })
+app.use(cors({ origin: "*" }));
+
+app.post("/login", async (req: Request, res: Response) => {
+  const { email, password } = req.body as { email: string; password: string };
+
+  const user = await prisma.user.findUnique({ where: { email } });
+
+  if (!user) {
+    return res.status(401).json({ error: "Invalid email or password" });
+  }
+
+  const passwordMatch = await bcrypt.compare(password, user.password);
+
+  if (!passwordMatch) {
+    return res.status(401).json({ error: "Invalid email or password" });
+  }
+
+  const token = jwt.sign({ userId: user.id }, secretKey, { expiresIn: "1h" });
+
+  res.status(200).json({ token });
+});
+
+app.post("/signup", async (req: Request, res: Response) => {
+  const { username, password, email } = req.body;
+
+  const existingUser = await prisma.user.findUnique({
+    where: {
+      email: email,
+    },
+  });
+
+  if (existingUser) {
+    return res.status(400).json({ error: "Username or email already exists" });
+  }
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  const applicantRole = await prisma.role.findUnique({
+    where: {
+      title: "applicant",
+    },
+  });
+
+  const newUser = await prisma.user.create({
+    data: {
+      username: username,
+      password: hashedPassword,
+      email: email,
+      role: {
+        connect: { id: applicantRole.id },
+      },
+    },
+  });
+
+  const token = jwt.sign({ userId: newUser.id }, secretKey, {
+    expiresIn: "1h",
+  });
+
+  res.status(201).json({ token });
+});
+
+interface CustomRequest extends Request {
+  userId: number;
+}
+
+const authenticate = (
+  req: CustomRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  const token = req.headers.authorization?.split(" ")[1];
+
+  if (!token) {
+    return res.status(401).json({ error: "Missing authorization token" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, secretKey) as { userId: number };
+    req.userId = decoded.userId;
+    next();
+  } catch (error) {
+    return res.status(401).json({ error: "Invalid token" });
+  }
+};
+
+app.get(
+  "/protected-route",
+  authenticate,
+  (req: CustomRequest, res: Response) => {
+    const userId = req.userId;
+    res.status(200).json({ userId });
+  }
 );
+
 app.get("/vacancy-suggestions", async (req, res) => {
   const { q } = req.query;
 
