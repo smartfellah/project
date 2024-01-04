@@ -66,9 +66,11 @@ const ProfilePage: FC = () => {
 
   return (
     <div className={styles.Container}>
-      <div>
-        <h1>Welcome, {user?.name}</h1>
-        <div>
+      <div className={styles.UserInfo}>
+        <h1 className={styles.Greeting}>
+          Welcome, <span className={styles.Username}>{user?.name}</span>
+        </h1>
+        <div className={styles.UserInfoInput}>
           <label htmlFor="name">Name:</label>
           <input
             type="text"
@@ -78,7 +80,7 @@ const ProfilePage: FC = () => {
             disabled={!isEditing}
           />
         </div>
-        <div>
+        <div className={styles.UserInfoInput}>
           <label htmlFor="email">Email:</label>
           <input
             type="email"
@@ -88,14 +90,27 @@ const ProfilePage: FC = () => {
             disabled={!isEditing}
           />
         </div>
-        {!isEditing && <button onClick={handleEditClick}>Edit</button>}
+        {!isEditing && (
+          <button className={styles.EditButton} onClick={handleEditClick}>
+            Edit
+          </button>
+        )}
         {isEditing && (
           <>
-            <button onClick={handleSaveClick}>Save</button>
-            <button onClick={() => setIsEditing(false)}>Cancel</button>
+            <button className={styles.EditButton} onClick={handleSaveClick}>
+              Save
+            </button>
+            <button
+              className={styles.CancelButton}
+              onClick={() => setIsEditing(false)}
+            >
+              Cancel
+            </button>
           </>
         )}
-        <button onClick={handleLogout}>Logout</button>
+        <button className={styles.LogoutButton} onClick={handleLogout}>
+          Logout
+        </button>
       </div>
     </div>
   );
