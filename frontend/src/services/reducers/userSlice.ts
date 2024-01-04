@@ -5,16 +5,19 @@ export type User = {
   id: string;
   name: string;
   email: string;
-} | null;
+};
 
-const initialState: User = null;
+const initialState: User = {} as User;
 
 export const userSlice = createSlice({
   name: "users",
   initialState,
   reducers: {
     setUser: (state: User, action: PayloadAction<User>) => {
-      state = action.payload;
+      console.log(action.payload);
+      state.email = action.payload?.email;
+      state.id = action.payload?.id;
+      state.name = action.payload?.name;
     },
   },
 });

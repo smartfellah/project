@@ -2,8 +2,13 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "./signup-page.module.css";
+import Cookies from "js-cookie";
+import { useDispatch } from "react-redux";
+import { setUser } from "../services/reducers/userSlice";
 
 export const SignupPage = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -18,9 +23,12 @@ export const SignupPage = () => {
         email,
         password,
       });
-      const token = response.data.token;
-      // Store the token as a cookie
-      document.cookie = `token=${token}; path=/;`;
+      const { token } = response.data;
+      const name = response.data.username;
+      const user_email = response.data.email;
+      dispatch(setUser({ id: "1", name: name, email: user_email }));
+      Cookies.set("token", token, { expires: 1 }); // Expires in 1 day
+      navigate("/profile");
     } catch (error) {
       console.log(error);
     }

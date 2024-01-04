@@ -1,10 +1,14 @@
 import { useState, SyntheticEvent } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "./login-page.module.css";
 import Cookies from "js-cookie";
+import { useDispatch } from "react-redux";
+import { setUser } from "../services/reducers/userSlice";
 
 export const LoginPage: React.FC = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -17,8 +21,11 @@ export const LoginPage: React.FC = () => {
         email,
         password,
       });
-      const { token } = response.data;
+      const { token, username } = response.data;
+      const user_email = response.data.email;
+      dispatch(setUser({ id: "1", name: username, email: user_email }));
       Cookies.set("token", token, { expires: 1 }); // Expires in 1 day
+      navigate("/profile");
     } catch (error) {
       setError("Invalid email or password");
     }

@@ -30,7 +30,7 @@ app.post("/login", async (req: Request, res: Response) => {
 
   const token = jwt.sign({ userId: user.id }, secretKey, { expiresIn: "1h" });
 
-  res.status(200).json({ token });
+  res.status(200).json({ token, username: user.username, email: user.email });
 });
 
 app.post("/signup", async (req: Request, res: Response) => {
@@ -69,7 +69,7 @@ app.post("/signup", async (req: Request, res: Response) => {
     expiresIn: "1h",
   });
 
-  res.status(201).json({ token });
+  res.status(201).json({ token, username, email });
 });
 
 interface CustomRequest extends Request {
