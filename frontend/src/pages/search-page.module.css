@@ -8,6 +8,34 @@
   justify-content: start;
 }
 
+.SearchAndSuggestions {
+  /* position: absolute; */
+  display: flex;
+  flex-direction: column;
+}
+
+.SuggestionsContainer {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  top: var(--l-2);
+  width: 100%;
+
+  background-color: var(--bg-primary);
+  z-index: 1050;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+.Suggestion {
+  font-family: var(--font-family-main);
+  cursor: pointer;
+  padding: var(--s-4);
+}
+.Suggestion:hover {
+  background-color: var(--accent-primary);
+  color: var(--text-light);
+}
+
 .SearchFormContainer {
   margin: auto;
   height: var(--l-3);
@@ -17,6 +45,7 @@
 }
 
 .ButtonContainer {
+  position: relative;
   width: 50%;
   height: var(--l-1);
   display: flex;

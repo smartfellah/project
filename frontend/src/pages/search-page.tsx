@@ -16,12 +16,21 @@ const SearchPage: FC = () => {
   // const [totalCount, setTotalCount] = useState<number>();
   const [totalPages, setTotalPages] = useState<number>(currentPage);
 
+  const [displaySuggestions, setDisplaySuggestions] = useState(false);
+
+  const [suggestions, setSuggestions] = useState([] as { title: string }[]);
+
   const p = searchParams.get("q");
   const [q, setQ] = useState((p as string) || "");
 
   function handleChange(event: React.FormEvent<HTMLInputElement>) {
     setQ(event.currentTarget.value);
   }
+
+  useEffect(() => {
+    if (!q) setDisplaySuggestions(false);
+    else setDisplaySuggestions(true);
+  }, [q, setQ]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     setSearchParams({ q: q, ...searchParams });
@@ -129,28 +138,59 @@ const SearchPage: FC = () => {
         .finally(() => setIsLoaded(true));
     }
   }, [currentPage, searchParams]);
-  // useEffect(() => {
-  //   setSearchParams({ q: q, ...searchParams });
-  // }, [q, searchParams, setSearchParams]);
+  useEffect(() => {
+    if (q) {
+      fetch(`http://localhost:8080/vacancy-suggestions?q=${q}`)
+        .then((res) => res.json())
+        .then(
+          (result) => {
+            if (result) setSuggestions([...result.suggestions]);
+            setError(false);
+          },
+          (error) => {
+            console.log(error);
+            setError(true);
+          }
+        )
+        .finally(() => setIsLoaded(true));
+    }
+  }, [q, setQ]);
+
+  // Render the filtered suggestions
+  const renderSuggestions = () => {
+    return suggestions.map((suggestion) => (
+      <div className={styles.Suggestion} key={suggestion.title}>
+        {suggestion.title}
+      </div>
+    ));
+  };
   return (
     <div>
-      <div className={styles.SearchFormContainer}>
-        <div className={styles.Container}>
-          <form onSubmit={handleSubmit} className={styles.ButtonContainer}>
-            <input
-              onChange={handleChange}
-              className={styles.TextInput}
-              type="search"
-              name="search-form"
-              placeholder="search..."
-              id="search-form"
-              value={q}
-            />
+      <div className={styles.SearchAndSuggestions}>
+        <div className={styles.SearchFormContainer}>
+          <div className={styles.Container}>
+            <form onSubmit={handleSubmit} className={styles.ButtonContainer}>
+              <input
+                onChange={handleChange}
+                className={styles.TextInput}
+                type="search"
+                name="search-form"
+                placeholder="search..."
+                id="search-form"
+                value={q}
+                autoComplete="off"
+                onFocus={() => setDisplaySuggestions(true)}
+                onBlur={() => setDisplaySuggestions(false)}
+              />
+              <div className={styles.SuggestionsContainer}>
+                {displaySuggestions ? renderSuggestions() : null}
+              </div>
 
-            <button type="submit" className={styles.SearchButton}>
-              <p className={styles.ButtonText}>Search</p>
-            </button>
-          </form>
+              <button type="submit" className={styles.SearchButton}>
+                <p className={styles.ButtonText}>Search</p>
+              </button>
+            </form>
+          </div>
         </div>
       </div>
       <div>

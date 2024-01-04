@@ -16,6 +16,21 @@ app.use(
     origin: "*",
   })
 );
+app.get("/vacancy-suggestions", async (req, res) => {
+  const { q } = req.query;
+
+  const where = q ? { title: { contains: q.toString() } } : {};
+
+  const suggestions = await prisma.vacancy.findMany({
+    where,
+    take: 5, // Limit the number of suggestions to 5
+    select: {
+      title: true,
+    },
+  });
+
+  res.status(200).json({ suggestions });
+});
 
 app.get("/vacancies", async (req, res) => {
   const { q, page = 1, limit = 10 } = req.query;
