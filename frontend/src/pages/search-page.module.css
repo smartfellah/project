@@ -103,10 +103,16 @@
   justify-content: center;
 }
 .FilterSection {
+  font-family: var(--font-family-main);
   margin-block: var(--l-2);
   display: flex;
   flex-direction: column;
+  gap: var(--s-4);
   width: 30%;
+}
+.FilterContainer {
+  display: flex;
+  gap: var(--s-4);
 }
 
 .VacanciesList {

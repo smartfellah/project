@@ -195,7 +195,23 @@ const SearchPage: FC = () => {
       </div>
       <div className={styles.MainContainer}>
         <section className={styles.FilterSection}>
-          <h2>Filters</h2>
+          <h2 style={{ fontWeight: "bold", fontSize: "32px" }}>Filters</h2>
+          <div className={styles.FilterContainer}>
+            <label htmlFor="location">Location:</label>
+            <select id="location" name="location">
+              <option value="">All</option>
+              <option value="New York">New York</option>
+              <option value="San Francisco">San Francisco</option>
+            </select>
+          </div>
+          <div className={styles.FilterContainer}>
+            <label htmlFor="experience">Experience:</label>
+            <select id="experience" name="experience">
+              <option value="">All</option>
+              <option value="Junior">Junior</option>
+              <option value="Mid-level">Mid-level</option>
+            </select>
+          </div>
         </section>
         <ul className={styles.VacanciesList}>
           {isLoaded && !error
@@ -238,15 +254,5 @@ export interface IVacancy {
   experience: string;
   location: string;
 }
-
-// interface ISuggestion {
-//   id: number;
-//   userId: number;
-//   companyId: number;
-//   title: string;
-//   content: string;
-//   experience: string;
-//   location: string;
-// }
 
 export { SearchPage };
