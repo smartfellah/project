@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../services/store";
 import { useNavigate } from "react-router";
 import { User, setUser } from "../services/reducers/userSlice";
+import axios from "axios";
 
 const ProfilePage: FC = () => {
   const navigate = useNavigate();
@@ -40,6 +41,27 @@ const ProfilePage: FC = () => {
     setIsEditing(false);
     const updatedUser = { ...user, name, email };
     dispatch(setUser(updatedUser));
+    const token = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("token="))
+      ?.split("=")[1];
+
+    // Set the authorization token in the request headers
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    axios
+      .put("http://localhost:8080/api/user", { name, email }, config)
+      .then((response) => {
+        // Handle the response if needed
+        console.log("User info updated successfully", response.data);
+      })
+      .catch((error) => {
+        // Handle the error if needed
+        console.error("Failed to update user info", error);
+      });
   };
 
   return (

@@ -96,6 +96,29 @@ const authenticate = (
   }
 };
 
+app.put(
+  "/api/user",
+  authenticate,
+  async (req: CustomRequest, res: Response) => {
+    const userId = req.userId;
+    const { name, email } = req.body as { name: string; email: string };
+
+    try {
+      const updatedUser = await prisma.user.update({
+        where: { id: userId },
+        data: { username: name, email },
+      });
+
+      res
+        .status(200)
+        .json({ message: "User info updated successfully", user: updatedUser });
+    } catch (error) {
+      console.error("Failed to update user info", error);
+      res.status(500).json({ error: "Failed to update user info" });
+    }
+  }
+);
+
 app.get(
   "/protected-route",
   authenticate,
