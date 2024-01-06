@@ -12,6 +12,7 @@ import { SearchPage } from "./pages/search-page";
 import { LoginPage } from "./pages/login-page";
 import { SignupPage } from "./pages/signup-page";
 import { SingleVacancy } from "./pages/single-vacancy-page";
+import { Footer } from "./components/footer/footer";
 
 function App() {
   //const [count, setCount] = useState(0);
@@ -28,6 +29,7 @@ function App() {
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/signup" element={<SignupPage />}></Route>
       </Routes>
+      <Footer />
     </Router>
   );
 }

@@ -1,0 +1,24 @@
+.Container {
+  margin-top: var(--l-2);
+  padding-block: var(--l-1);
+  background-color: var(--bg-dark);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.Social {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+}
+.Link {
+  color: var(--text-grey);
+}
+.Link:visited {
+  color: var(--text-grey);
+}
+
+.Link:hover {
+  color: var(--accent-primary);
+}

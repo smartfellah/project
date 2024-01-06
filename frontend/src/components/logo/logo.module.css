@@ -1,0 +1,7 @@
+.LogoIcon {
+  height: var(--l-2);
+  color: var(--text-grey);
+}
+.LogoIcon:hover {
+  color: var(--accent-primary);
+}
